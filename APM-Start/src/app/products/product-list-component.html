@@ -1,6 +1,6 @@
 <div class="card" >
   <div class="card-header">
-   {{titre}}
+   {{titre}} {{rating_text}}
   </div>
   <div class="card-body">
     <div class="row">
@@ -8,13 +8,13 @@
        filtered by:
       </div>
       <div class="col-md-4">
-         <input type="text"/>
+         <input type="text" [(ngModel)]='searchText'/>
        </div>
       <div class="col-sm-6">
 
        </div>
       <div class="col-md-6">
-        <h4>filtered by:</h4>
+        <h4>filtered by: {{searchText}}</h4>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
       <thead>
         <tr>
           <th scope="col">
-            <button class="btn btn-primary">Afficher image</button>
+            <button (click)="onClickHide()" class="btn btn-primary">{{isHidden?'Afficher': 'Cacher' }} image</button>
           </th>
           <th scope="col">Produit</th>
           <th scope="col">Code</th>
@@ -36,13 +36,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
-          <th scope="row">1</th>
-          <td>{{product.productName}}</td>
-          <td>{{product.productCode}}</td>
-          <td>{{product.releaseDate}}</td>
-          <td>{{product.price}}</td>
-          <td>{{product.starRating}}</td>
+        <tr *ngFor="let product of filterProducts">
+          <th scope="row"><img [src]='product.imageUrl'
+                              [style.width.px]="imageWidth"
+                              [style.margin.px]="imageMargin"
+                              [hidden]="isHidden">
+                            </th>
+          <td><a [routerLink]="['/product',product.productId]" >{{product.productName}}</a></td>
+          <td>{{product.productCode| lowercase| customPipe:'-':' '}}</td>
+          <td>{{product.releaseDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{product.price|currency:'EUR':'symbol':'1.2-2'}}</td>
+          <!-- <td>{{product.starRating}}</td> -->
+          <td><star [rating]='product.starRating' (notif)='onNotif($event)'></star></td>
         </tr>
 
       </tbody>

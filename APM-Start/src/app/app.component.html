@@ -1,7 +1,26 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">{{title}}!!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active" [routerLink]="['/welcome']">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" [routerLink]="['/products']">Product List</a>
+      <!-- <a class="nav-link" href="#">Pricing</a>
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+    </div>
+  </div>
+</nav>
+<div class='container'>
+<router-outlet></router-outlet>
+
+</div>
+
+<!-- <div >
   <h1 style="text-align:center">
     {{title}}!!
   </h1>
   <pm-products></pm-products>
-</div>
+</div> -->
